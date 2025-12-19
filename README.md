@@ -103,21 +103,21 @@ failed      ===>>   Error after retries
 
 # Tech Stack
 
-Layer           ===>>       Technology
+Layer           ===>>       Technology 
 Runtime         ===>>       Node.js 
-Language        ===>>       TypeScript (ES Modules)
-API             ===>>       Fastify
-WebSockets      ===>>       @fastify/websocket
-Queue           ===>>       BullMQ
-Cache / PubSub  ===>>       Redis
-Database        ===>>       PostgreSQL (Neon)
-Testing         ===>>       Axios, ws
+Language        ===>>       TypeScript 
+API             ===>>       Fastify 
+WebSockets      ===>>       @fastify/websocket 
+Queue           ===>>       BullMQ 
+Cache / PubSub  ===>>       Redis 
+Database        ===>>       PostgreSQL (Neon) 
+Testing         ===>>       Axios, ws 
 
 # Installation
 
 1. Install Dependencies
 
-npm install 
+		npm install 
 
 2. Environment Variables
 
@@ -130,32 +130,28 @@ DATABASE_URL=postgresql://neondb_owner:npg_GCofBJK5P2Yw@ep-flat-queen-ad3g8iqh-p
 
 - Start Redis (Check Whether Redis Connected using ./testing/testRedis.js)
 
-Terminal: 
+		Terminal: 
 
-node testing/testRedis.js
+				node testing/testRedis.js
 
-Output:
+		Output:
 
-PONG
+				PONG
 
 - Start Database (Check Whether Database Connected using ./testing/testDB.js)
 
-Terminal: 
+		Terminal: 
 
-node testing/testDB.js
+				node testing/testDB.js
 
-Output:
+		Output:
 
-DB connected at: {Date}
+				DB connected at: {Date}
 
 - Start API Server
 
-npm run dev
-
-- Start Worker
-
-npm run worker
+		npm run dev
 
 - Run WebSocket Test
 
-npx tsx testing/testOrderWS.ts
+		npx tsx testing/testOrderWS.ts
