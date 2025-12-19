@@ -156,3 +156,96 @@ Create .env file:
 - Run WebSocket Test
 
 		npx tsx testing/testOrderWS.ts
+
+# API Reference 
+
+1. Submit Order
+
+	POST /api/orders/execute
+
+2. Request Body
+
+	{
+  		"symbol": "AAPL",
+  		"side": "buy",
+  		"quantity": 10
+	} 
+
+3. Response
+
+	{
+  		"orderId": "uuid"
+	}
+
+4. WebSocket Updates
+
+	ws://localhost:3000/ws/orders?orderId=<orderId>
+
+# Deployment
+
+1. High-Level Deployment Diagram 
+
+	┌─────────────────────────────┐ 
+	│           Client            │ 
+	│  (Postman / Browser / WS)   │ 
+	└──────────────┬──────────────┘ 
+	               │ HTTP / WS 
+ 	              ▼ 
+	┌──────────────────────────────────────────┐ 
+	│        Render Web Service (Node.js)       │ 
+	│                                          │ 
+	│  ┌────────────────────────────────────┐  │ 
+	│  │ Fastify API + WebSocket Server     │  │ 
+	│  │                                    │  │ 
+	│  │ POST /api/orders/execute           │  │ 
+	│  │ GET  /ws/orders?orderId=...        │  │ 
+	│  └──────────────┬─────────────────────┘  │ 
+	│                 │                         │ 
+	│  ┌──────────────▼─────────────────────┐  │ 
+	│  │ BullMQ Worker (same process)        │  │ 
+	│  │                                    │  │ 
+	│  │ • Routing (Raydium vs Meteora)     │  │ 
+	│  │ • Slippage simulation              │  │ 
+	│  │ • Retry & failure handling         │  │ 
+	│  └──────────────┬─────────────────────┘  │ 
+	│                 │                         │ 
+	│  ┌──────────────▼─────────────────────┐  │ 
+	│  │ Mock DEX Router                    │  │ 
+	│  │ (Raydium + Meteora)                │  │ 
+	│  └────────────────────────────────────┘  │ 
+	└──────────────┬──────────────┬─────────────┘ 
+	               │              │ 
+	               │              │ 
+	    Redis (Redis Cloud)   PostgreSQL (Neon) 
+ 	       ──────────────   ───────────────── 
+ 	       • BullMQ Queue   • Order history 
+ 	       • Pub/Sub        • Status tracking 
+
+2. Order Execution Flow Diagram
+
+Client 
+  │ 
+  │ POST /api/orders/execute 
+  ▼ 
+API Server 
+  │ 
+  │ enqueue job 
+  ▼ 
+BullMQ Queue (Redis) 
+  │ 
+  │ worker pulls job 
+  ▼ 
+Worker 
+  │ 
+  ├─ status: pending 
+  ├─ status: routing 
+  │     ├─ Raydium quote 
+  │     └─ Meteora quote 
+  ├─ status: building 
+  ├─ status: submitted 
+  ├─ execute swap (mock) 
+  ├─ status: confirmed | failed 
+  ▼ 
+PostgreSQL (Neon) 
+  │ 
+  └─ Persist lifecycle + metadata 
