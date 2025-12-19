@@ -6,6 +6,7 @@ import { addClient, removeClient, broadcast, getLatestStatus } from "./ws/wsMana
 import type { WebSocket as WS } from "ws";
 import { redis } from "./queue.js";
 import "dotenv/config";
+import "./worker.js";
 
 const app = Fastify({ logger: true });
 

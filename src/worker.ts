@@ -5,6 +5,7 @@ import { publishOrderEvent } from "./ws/events.js";
 import { saveOrder } from "./db/postgres.js";
 import "dotenv/config";
 
+
 const router = new MockDexRouter();
 
 const worker = new Worker(
