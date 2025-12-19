@@ -48,9 +48,10 @@ function listenToOrder(orderId: string) {
 async function main() {
   const orders = [
     { symbol: "AAPL", side: "buy" as const, quantity: 10 },
-    // { symbol: "AAPL", side: "buy" as const, quantity: 10 },
-    // { symbol: "TSLA", side: "sell" as const, quantity: 5 },
-    // { symbol: "GOOG", side: "buy" as const, quantity: 3 },
+    { symbol: "TSLA", side: "sell" as const, quantity: 5 },
+    { symbol: "GOOG", side: "buy" as const, quantity: 3 },
+    { symbol: "ETH", side: "buy" as const, quantity: 2 },
+    { symbol: "SOL", side: "sell" as const, quantity: 8 }
   ];
 
   const orderPromises = [];
