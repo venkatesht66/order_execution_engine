@@ -117,37 +117,37 @@ failed      ===>>   Error after retries
 
 1. Install Dependencies
 
-		npm install 
+	npm install 
 
 2. Environment Variables
 
 Create .env file:
 
-		REDIS_URL=redis://default:dQo4HFoYJ1rQ6NExofPM9jcGPhsZOMmc@redis-18067.c17.us-east-1-4.ec2.cloud.redislabs.com:18067 
+	REDIS_URL=redis://default:dQo4HFoYJ1rQ6NExofPM9jcGPhsZOMmc@redis-18067.c17.us-east-1-4.ec2.cloud.redislabs.com:18067 
 		
-		DATABASE_URL=postgresql://neondb_owner:npg_GCofBJK5P2Yw@ep-flat-queen-ad3g8iqh-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+	DATABASE_URL=postgresql://neondb_owner:npg_GCofBJK5P2Yw@ep-flat-queen-ad3g8iqh-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 
 3. Running the Project
 
 - Start Redis (Check Whether Redis Connected using ./testing/testRedis.js)
 
-		Terminal: 
+	Terminal: 
 
-				node testing/testRedis.js
+		node testing/testRedis.js
 
-		Output:
+	Output:
 
-				PONG
+		PONG
 
 - Start Database (Check Whether Database Connected using ./testing/testDB.js)
 
-		Terminal: 
+	Terminal: 
 
-				node testing/testDB.js
+		node testing/testDB.js
 
-		Output:
+	Output:
 
-				DB connected at: {Date}
+		DB connected at: {Date}
 
 - Start API Server
 
