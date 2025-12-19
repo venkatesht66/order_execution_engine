@@ -9,6 +9,7 @@ import "dotenv/config";
 import "./worker.js";
 
 const app = Fastify({ logger: true });
+const PORT = Number(process.env.PORT) || 3000;
 
 await app.register(websocket);
 
@@ -56,6 +57,6 @@ app.get("/ws/orders", { websocket: true }, (socketStream, request) => {
   ws.on("error", () => removeClient(orderId, ws));
 });
 
-app.listen({ port: 3000 }, () => {
+app.listen({ port: PORT, host: "0.0.0.0" }, () => {
   console.log("🚀 Server running on http://localhost:3000");
 });
