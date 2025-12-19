@@ -103,15 +103,15 @@ failed      ===>>   Error after retries
 
 # Tech Stack
 
-Layer           ===>>       Technology 
-Runtime         ===>>       Node.js 
-Language        ===>>       TypeScript 
-API             ===>>       Fastify 
-WebSockets      ===>>       @fastify/websocket 
-Queue           ===>>       BullMQ 
-Cache / PubSub  ===>>       Redis 
-Database        ===>>       PostgreSQL (Neon) 
-Testing         ===>>       Axios, ws 
+	Layer              	        Technology 
+	Runtime         ===>>       Node.js 
+	Language        ===>>       TypeScript 
+	API             ===>>       Fastify 
+	WebSockets      ===>>       @fastify/websocket 
+	Queue           ===>>       BullMQ 
+	Cache / PubSub  ===>>       Redis 
+	Database        ===>>       PostgreSQL (Neon) 
+	Testing         ===>>       Axios, ws 
 
 # Installation
 
