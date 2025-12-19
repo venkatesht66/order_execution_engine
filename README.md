@@ -28,19 +28,19 @@ Extending to Other Order Types
 
 pending → routing → building → submitted → confirmed / failed
 
-Status              Description 
-pending     ===>>   Order received and queued 
-routing     ===>>   Comparing Raydium & Meteora prices 
-building    ===>>   Preparing transaction 
-submitted   ===>>   Transaction sent (mock) 
-confirmed   ===>>   Execution successful 
-failed      ===>>   Error after retries 
+Status              Description  
+pending     ===>>   Order received and queued  
+routing     ===>>   Comparing Raydium & Meteora prices  
+building    ===>>   Preparing transaction.  
+submitted   ===>>   Transaction sent (mock)  
+confirmed   ===>>   Execution successful  
+failed      ===>>   Error after retries  
 
 # DEX Routing Logic
 
-- Fetches price quotes from:
-	•	Raydium
-	•	Meteora
+- Fetches price quotes from:  
+	•	Raydium  
+	•	Meteora  
 - Applies realistic price variance (2–5%)
 - Selects the DEX with the best execution price
 - Logs routing decision for transparency
@@ -48,23 +48,23 @@ failed      ===>>   Error after retries
 # Transaction Settlement (Mock)
 
 - Simulates:
-	•	Network delay (2–3 seconds)
-	•	Market impact
-	•	Slippage tolerance (basis points)
+	•	Network delay (2–3 seconds)  
+	•	Market impact  
+	•	Slippage tolerance (basis points)  
 - Throws error if slippage exceeds tolerance
 - Returns:
-	•	txHash
-	•	executedPrice
-	•	slippage %
+	•	txHash  
+	•	executedPrice  
+	•	slippage %  
 
 # Queue & Concurrency
 
 - BullMQ + Redis
 - Up to 10 concurrent orders
 - Processes 100+ orders/min
-- Retry logic:
-	•	≤ 3 attempts
-	•	Exponential backoff
+- Retry logic:  
+	•	≤ 3 attempts  
+	•	Exponential backoff  
 - Emits "failed" status after retries exhausted
 - Persists failure reason for analysis
 
@@ -73,18 +73,18 @@ failed      ===>>   Error after retries
 # PostgreSQL
 
 - Stores full order lifecycle:
-	•	order_id
-	•	status
-	•	metadata (DEX, price, txHash, slippage)
-	•	failure reasons
-	•	timestamps
+	•	order_id  
+	•	status  
+	•	metadata (DEX, price, txHash, slippage)  
+	•	failure reasons  
+	•	timestamps  
 
 # Redis
 
 - Used for:
-	•	BullMQ job queue
-	•	Pub/Sub for WebSocket events
-	•	Active order state caching
+	•	BullMQ job queue  
+	•	Pub/Sub for WebSocket events  
+	•	Active order state caching  
 
 # WebSocket Architecture
 	•	Multiple clients per order supported
