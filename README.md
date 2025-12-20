@@ -8,14 +8,14 @@ The system simulates routing trades between Raydium and Meteora, selects the bes
 
 # Order Type Chosen: Market Order
 
-We implemented Market Orders because they:
-	•	Execute immediately at the best available price
-	•	Simplify routing and execution flow
-	•	Are ideal for demonstrating DEX comparison and real-time updates
+We implemented Market Orders because they:  
+	•	Execute immediately at the best available price  
+	•	Simplify routing and execution flow  
+	•	Are ideal for demonstrating DEX comparison and real-time updates  
 
-Extending to Other Order Types
-	•	Limit Orders: Store target price and re-queue orders until the price condition is met
-	•	Sniper Orders: Trigger execution based on on-chain events such as token launch or liquidity addition 
+Extending to Other Order Types:  
+	•	Limit Orders: Store target price and re-queue orders until the price condition is met  
+	•	Sniper Orders: Trigger execution based on on-chain events such as token launch or liquidity addition  
 
 # Order Execution Flow
 
