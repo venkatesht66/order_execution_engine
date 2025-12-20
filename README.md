@@ -117,7 +117,7 @@ pending → routing → building → submitted → confirmed / failed
 
 1. Install Dependencies
 
-	npm install 
+		npm install 
 
 2. Environment Variables
 
