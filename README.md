@@ -19,54 +19,54 @@ Extending to Other Order Types
 
 # Order Execution Flow
 
-1. Order Submission
-	•	Client submits an order via POST /api/orders/execute
-	•	API validates the request and returns an orderId
-	•	Client connects to WebSocket using the orderId to receive live updates
+1. Order Submission  
+	•	Client submits an order via POST /api/orders/execute  
+	•	API validates the request and returns an orderId  
+	•	Client connects to WebSocket using the orderId to receive live updates  
 
-2. Execution Lifecycle (WebSocket Updates)
+2. Execution Lifecycle (WebSocket Updates)  
 
-pending → routing → building → submitted → confirmed / failed
+pending → routing → building → submitted → confirmed / failed  
 
-Status              Description  
-pending     ===>>   Order received and queued  
-routing     ===>>   Comparing Raydium & Meteora prices  
-building    ===>>   Preparing transaction.  
-submitted   ===>>   Transaction sent (mock)  
-confirmed   ===>>   Execution successful  
-failed      ===>>   Error after retries  
+	Status				Description  
+	pending     ===>>   Order received and queued  
+	routing     ===>>   Comparing Raydium & Meteora prices  
+	building    ===>>   Preparing transaction.  
+	submitted   ===>>   Transaction sent (mock)  
+	confirmed   ===>>   Execution successful  
+	failed      ===>>   Error after retries  
 
 # DEX Routing Logic
 
 - Fetches price quotes from:  
 	•	Raydium  
 	•	Meteora  
-- Applies realistic price variance (2–5%)
-- Selects the DEX with the best execution price
-- Logs routing decision for transparency
+- Applies realistic price variance (2–5%)  
+- Selects the DEX with the best execution price  
+- Logs routing decision for transparency  
 
 # Transaction Settlement (Mock)
 
-- Simulates:
-	•	Network delay (2–3 seconds)  
+- Simulates:  
+	•	Network delay (2–3 seconds)   
 	•	Market impact  
 	•	Slippage tolerance (basis points)  
-- Throws error if slippage exceeds tolerance
-- Returns:
+- Throws error if slippage exceeds tolerance  
+- Returns:  
 	•	txHash  
 	•	executedPrice  
 	•	slippage %  
 
 # Queue & Concurrency
 
-- BullMQ + Redis
-- Up to 10 concurrent orders
-- Processes 100+ orders/min
+- BullMQ + Redis  
+- Up to 10 concurrent orders  
+- Processes 100+ orders/min  
 - Retry logic:  
 	•	≤ 3 attempts  
 	•	Exponential backoff  
-- Emits "failed" status after retries exhausted
-- Persists failure reason for analysis
+- Emits "failed" status after retries exhausted  
+- Persists failure reason for analysis  
 
 # Data Storage
 
