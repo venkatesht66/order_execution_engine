@@ -161,25 +161,25 @@ Create .env file:
 
 1. Submit Order
 
-	POST /api/orders/execute
+		POST /api/orders/execute
 
 2. Request Body
 
-	{ 
-  		"symbol": "AAPL", 
-  		"side": "buy", 
-  		"quantity": 10 
-	} 
+		{  
+  			"symbol": "AAPL",  
+  			"side": "buy",  
+  			"quantity": 10  
+		} 
 
 3. Response
 
-	{ 
-  		"orderId": "uuid" 
-	}
+		{  
+  			"orderId": "uuid"  
+		}
 
 4. WebSocket Updates
 
-	ws://localhost:3000/ws/orders?orderId=<orderId>
+		ws://localhost:3000/ws/orders?orderId=<orderId>
 
 # API Documentation 
 
